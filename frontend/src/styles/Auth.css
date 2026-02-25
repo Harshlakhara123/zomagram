@@ -1,0 +1,353 @@
+/* src/styles/Auth.css */
+@import './theme.css';
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Split Layout Additions --- */
+.auth-split {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.auth-left {
+    flex: 1.2;
+    background: var(--insta-gradient);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    color: white;
+    overflow: hidden;
+}
+
+/* Add an image overlay to the left side */
+.auth-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Use a placeholder image or radial gradient if no image */
+    background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    z-index: 1;
+}
+
+/* Gradient overlay for text readability */
+.auth-left::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 2;
+}
+
+
+.auth-left-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-left h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.auth-left p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.auth-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--bg-color);
+}
+
+/* Mobile responsive split layout */
+@media (max-width: 900px) {
+    .auth-left {
+        display: none;
+        /* Hide the image side on smaller screens */
+    }
+}
+
+/* --- Form Card --- */
+
+.auth-card {
+    background-color: var(--bg-surface);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    width: 100%;
+    max-width: 440px;
+    max-height: 90vh;
+    /* Ensure card never exceeds viewport height */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    border-radius: 24px;
+    padding: 2.5rem 3rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom Scrollbar for auth card */
+.auth-card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.auth-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.auth-card::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 10px;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-brand {
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--primary-brand);
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    /* Subtle glow for Zomato styling */
+    text-shadow: 0 2px 10px rgba(226, 55, 68, 0.2);
+}
+
+.auth-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.auth-header p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* --- Toggle Tabs --- */
+.auth-tabs {
+    display: flex;
+    background-color: var(--input-bg);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.auth-tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.auth-tab:hover {
+    color: var(--text-primary);
+}
+
+.auth-tab.active {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+    /* subtle instgram gradient border at bottom of active tab */
+    position: relative;
+}
+
+.auth-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background: var(--insta-gradient);
+    border-radius: 3px 3px 0 0;
+}
+
+
+/* --- Form Elements --- */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.auth-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.auth-input-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-left: 0.2rem;
+}
+
+.auth-input-group input {
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    /* Instagram-like slightly rounded, not fully pill */
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.auth-input-group input:focus {
+    border-color: var(--primary-brand);
+    /* Subtle red focus ring */
+    box-shadow: 0 0 0 4px rgba(226, 55, 68, 0.1);
+}
+
+.auth-input-group input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.auth-submit-btn {
+    background: var(--primary-brand);
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 0.5rem;
+    /* Soft red shadow */
+    box-shadow: 0 4px 12px rgba(226, 55, 68, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Hover adds the gradient touch */
+.auth-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(226, 55, 68, 0.4);
+    background: var(--zomato-gradient);
+}
+
+.auth-submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(226, 55, 68, 0.3);
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.auth-divider::before {
+    margin-right: 1em;
+}
+
+.auth-divider::after {
+    margin-left: 1em;
+}
+
+.auth-footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-top: 1rem;
+}
+
+.auth-footer a {
+    color: var(--primary-brand);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 0.4rem;
+    transition: opacity 0.2s ease;
+}
+
+.auth-footer a:hover {
+    background: var(--insta-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

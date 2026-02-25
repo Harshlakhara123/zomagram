@@ -1,0 +1,47 @@
+/* src/styles/theme.css */
+
+:root {
+    /* Zomato & Instagram Vibe - Light Theme */
+    --bg-color: #fafafa;
+    /* Soft light background */
+    --bg-surface: rgba(255, 255, 255, 0.9);
+    /* Glassmorphism */
+    --text-primary: #262626;
+    --text-secondary: #737373;
+    --border-color: #dbdbdb;
+    --primary-brand: #E23744;
+    /* Zomato Red */
+    --primary-brand-hover: #d22633;
+    --input-bg: #fafafa;
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --backdrop-blur: blur(16px);
+
+    /* Instagram Gradient */
+    --insta-gradient: linear-gradient(45deg, #F58529 0%, #DD2A7B 33%, #8134AF 66%, #515BD4 100%);
+    --zomato-gradient: linear-gradient(135deg, #E23744 0%, #D22C39 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Zomato & Instagram Vibe - Dark Theme */
+        --bg-color: #000000;
+        /* True black like Instagram dark mode */
+        --bg-surface: rgba(30, 30, 30, 0.85);
+        /* Dark Glassmorphism */
+        --text-primary: #f5f5f5;
+        --text-secondary: #a8a8a8;
+        --border-color: #363636;
+        --primary-brand: #E23744;
+        /* Zomato Red */
+        --primary-brand-hover: #ff4d5a;
+        --input-bg: #121212;
+        --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+        --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+        --backdrop-blur: blur(16px);
+
+        /* Instagram Gradient */
+        --insta-gradient: linear-gradient(45deg, #F58529 0%, #DD2A7B 33%, #8134AF 66%, #515BD4 100%);
+        --zomato-gradient: linear-gradient(135deg, #E23744 0%, #cb202d 100%);
+    }
+}
