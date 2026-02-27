@@ -88,7 +88,8 @@ const Home = () => {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/food", {
+                const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+                const response = await axios.get(`${apiUrl}/api/food`, {
                     withCredentials: true
                 });
                 setVideos(response.data.foodItems);
@@ -146,7 +147,8 @@ const Home = () => {
                 className="feed-logout-btn"
                 onClick={async () => {
                     try {
-                        await axios.get('http://localhost:3000/api/auth/user/logout', {
+                        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+                        await axios.get(`${apiUrl}/api/auth/user/logout`, {
                             withCredentials: true
                         });
                         window.location.href = '/user/login';

@@ -69,8 +69,9 @@ const Profile = () => {
     useEffect(() => {
         const fetchPartner = async () => {
             try {
-                // Determine API base url (using localhost:3000 as default per earlier iterations)
-                const apiUrl = `http://localhost:3000/api/food-partner/${id}`;
+                // Determine API base url
+                const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+                const apiUrl = `${baseUrl}/api/food-partner/${id}`;
                 const response = await axios.get(apiUrl, {
                     withCredentials: true
                 });
@@ -124,7 +125,8 @@ const Profile = () => {
 
     const handleDeletePost = async (videoId) => {
         try {
-            await axios.delete(`http://localhost:3000/api/food/${videoId}`, {
+            const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+            await axios.delete(`${baseUrl}/api/food/${videoId}`, {
                 withCredentials: true
             });
             // Update UI by filtering out the deleted video
@@ -156,7 +158,8 @@ const Profile = () => {
                                 className="profile-logout-btn"
                                 onClick={async () => {
                                     try {
-                                        await axios.get('http://localhost:3000/api/auth/food-partner/logout', {
+                                        const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+                                        await axios.get(`${baseUrl}/api/auth/food-partner/logout`, {
                                             withCredentials: true
                                         });
                                         navigate('/food-partner/login');

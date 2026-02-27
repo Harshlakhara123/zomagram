@@ -17,7 +17,8 @@ const UserRegister = () => {
         const password = e.target.elements.password.value;
 
         try {
-            const response = await axios.post("http://localhost:3000/api/auth/user/register", {
+            const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+            const response = await axios.post(`${baseUrl}/api/auth/user/register`, {
                 fullName: name,
                 email,
                 password
