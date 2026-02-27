@@ -75,7 +75,8 @@ const CreateFood = () => {
         formData.append("video", video); // matches multer configuration 'upload.single("video")'
 
         try {
-            const response = await axios.post("http://localhost:3000/api/food", formData, {
+            const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+            const response = await axios.post(`${baseUrl}/api/food`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
