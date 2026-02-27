@@ -27,7 +27,11 @@ async function registerUser(req, res) {
     const token = jwt.sign({
         id: user._id,
     }, process.env.JWT_SECRET)
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    })
 
     res.status(201).json({
         _id: user._id,
@@ -60,7 +64,11 @@ async function loginUser(req, res) {
         id: user._id,
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    })
 
     res.status(200).json({
         message: "user logged in successfully",
@@ -73,7 +81,11 @@ async function loginUser(req, res) {
 }
 
 async function logoutUser(req, res) {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    });
     res.status(200).json({
         message: "user logged out sccessfully"
     })
@@ -105,7 +117,11 @@ async function registerFoodPartner(req, res) {
         id: foodPartner._id,
     }, process.env.JWT_SECRET);
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    });
 
     res.status(201).json({
         message: "Food partner registered successfully",
@@ -143,7 +159,11 @@ async function loginFoodPartner(req, res) {
         id: foodPartner._id,
     }, process.env.JWT_SECRET);
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    });
 
     res.status(200).json({
         message: "food partner logged in successfully",
@@ -156,7 +176,11 @@ async function loginFoodPartner(req, res) {
 }
 
 async function logoutFoodPartner(req, res) {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    });
     res.status(200).json({
         message: "food partner logged out successfully",
     })
