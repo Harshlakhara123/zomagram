@@ -24,7 +24,7 @@ const UserLogin = () => {
                 withCredentials: true
             });
 
-            navigate("/")
+            navigate("/home")
         } catch (err) {
             console.error("User Login Error:", err);
             setError(err.response?.data?.message || "Invalid email or password");
