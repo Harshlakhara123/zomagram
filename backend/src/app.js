@@ -10,7 +10,7 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:5173", "https://zomagram-lemon.vercel.app"], // Keep localhost for dev, add Vercel for prod
+    origin: ["http://localhost:5173", "https://zomagram-lemon.vercel.app", "https://zomagram-harshlakhara123s-projects.vercel.app"],
     credentials: true
 }));
 
