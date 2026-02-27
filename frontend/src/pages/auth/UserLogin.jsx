@@ -1,8 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/Auth.css';
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const UserLogin = () => {
+    const navigate = useNavigate();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const email = e.target.elements.email.value;
+        const password = e.target.elements.password.value;
+
+        const response = await axios.post("http://localhost:3000/api/auth/user/login", {
+            email,
+            password
+        }, {
+            withCredentials: true
+        });
+
+        navigate("/")
+    }
     return (
         <div className="auth-container auth-split">
             {/* Left Side: Branding / Imagery */}
@@ -27,15 +45,15 @@ const UserLogin = () => {
                         <Link to="/food-partner/login" className="auth-tab">Partner</Link>
                     </div>
 
-                    <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+                    <form className="auth-form" onSubmit={handleSubmit}>
                         <div className="auth-input-group">
                             <label htmlFor="email">Email address</label>
-                            <input type="email" id="email" placeholder="name@example.com" />
+                            <input type="email" id="email" name="email" placeholder="name@example.com" />
                         </div>
 
                         <div className="auth-input-group">
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" placeholder="••••••••" />
+                            <input type="password" id="password" name="password" placeholder="••••••••" />
                         </div>
 
                         <button type="submit" className="auth-submit-btn">

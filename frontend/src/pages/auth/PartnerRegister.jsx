@@ -1,8 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/Auth.css';
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const PartnerRegister = () => {
+    const navigate = useNavigate();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const name = e.target.elements.name.value;
+        const contactName = e.target.elements.contactName.value;
+        const phone = e.target.elements.phone.value;
+        const address = e.target.elements.address.value;
+        const email = e.target.elements.email.value;
+        const password = e.target.elements.password.value;
+
+        const response = await axios.post("http://localhost:3000/api/auth/food-partner/register", {
+            name,
+            contactName,
+            phone,
+            address,
+            email,
+            password
+        }, {
+            withCredentials: true
+        });
+
+        console.log(response.data);
+
+        navigate("/create-food")
+    }
     return (
         <div className="auth-container auth-split">
             {/* Left Side: Branding / Imagery */}
@@ -27,35 +55,35 @@ const PartnerRegister = () => {
                         <Link to="/food-partner/register" className="auth-tab active">Partner</Link>
                     </div>
 
-                    <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+                    <form className="auth-form" onSubmit={handleSubmit}>
                         <div className="auth-input-group">
                             <label htmlFor="name">Name</label>
-                            <input type="text" id="name" placeholder="Business Name" />
+                            <input type="text" id="name" name="name" placeholder="Business Name" />
                         </div>
 
                         <div className="auth-input-group">
                             <label htmlFor="contactName">Contact name</label>
-                            <input type="text" id="contactName" placeholder="John Doe" />
+                            <input type="text" id="contactName" name="contactName" placeholder="John Doe" />
                         </div>
 
                         <div className="auth-input-group">
                             <label htmlFor="phone">Phone number</label>
-                            <input type="tel" id="phone" placeholder="+1 234 567 8900" />
+                            <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900" />
                         </div>
 
                         <div className="auth-input-group">
                             <label htmlFor="address">Address</label>
-                            <input type="text" id="address" placeholder="123 Main St, City" />
+                            <input type="text" id="address" name="address" placeholder="123 Main St, City" />
                         </div>
 
                         <div className="auth-input-group">
                             <label htmlFor="email">Email address</label>
-                            <input type="email" id="email" placeholder="restaurant@example.com" />
+                            <input type="email" id="email" name="email" placeholder="restaurant@example.com" />
                         </div>
 
                         <div className="auth-input-group">
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" placeholder="Create a strong password" />
+                            <input type="password" id="password" name="password" placeholder="Create a strong password" />
                         </div>
 
                         <button type="submit" className="auth-submit-btn">
