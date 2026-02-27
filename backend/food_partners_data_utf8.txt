@@ -1,0 +1,47 @@
+﻿[dotenv@17.3.1] injecting env (5) from .env -- tip: ≡ƒ¢á∩╕Å  run anywhere with `dotenvx run -- yourcommand`
+[
+  {
+    "_id": "699f53b5faff33400fcee345",
+    "name": "foodpartner-test",
+    "email": "foodpartner-test@example.com",
+    "password": "$2b$10$DVChbAz0b/.qwsgRLqDCWeeA.pvz9ql8cqkSCfmySrmIsC6acUWl2",
+    "__v": 0
+  },
+  {
+    "_id": "699f5cd8e26a58b4e04d922d",
+    "name": "harsh",
+    "email": "harsh@123gmail.com",
+    "password": "$2b$10$jf.0qVDzvhlodkstsTppWeww3kh2IEiqV54zG4zmTP03mLIkL4xLm",
+    "__v": 0
+  },
+  {
+    "_id": "69a0e09697bc73f818f06d43",
+    "name": "mahesh",
+    "contactName": "harsh",
+    "phone": "1234",
+    "address": "123 tinwari",
+    "email": "mahesh@gmail.com",
+    "password": "$2b$10$EvExCYsEUD21JtJUMyoyM.foDIXnRWmX34Evj80bjHwjoxmitSBnm",
+    "__v": 0
+  },
+  {
+    "_id": "69a0ea3d97bc73f818f06d49",
+    "name": "buisenesstest",
+    "contactName": "buisenesstest",
+    "phone": "1234",
+    "address": "1234",
+    "email": "test@1234.com",
+    "password": "$2b$10$kHdgqp1bZ9CeJ3nifwuwg.llivbzrIrqWfrghF.OJ7aXYBmemOWTO",
+    "__v": 0
+  },
+  {
+    "_id": "69a162bcf3d9f71771763408",
+    "name": "test restaurant",
+    "contactName": "harsh",
+    "phone": "12341234",
+    "address": "123 main",
+    "email": "test@harsh.com",
+    "password": "$2b$10$tccS5yuAkqy9dk2JHjam3uf8WBS.2sFQb5T71qPaPjhpDZl/jPx.W",
+    "__v": 0
+  }
+]

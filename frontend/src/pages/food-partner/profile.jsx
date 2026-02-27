@@ -1,4 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../../styles/Profile.css';
 
 const MOCK_PARTNER_DATA = {
@@ -16,7 +18,7 @@ const MOCK_PARTNER_DATA = {
     ]
 };
 
-const VideoGridItem = ({ videoUrl }) => {
+const VideoGridItem = ({ videoUrl, videoId, onDelete }) => {
     const videoRef = useRef(null);
 
     return (
@@ -41,12 +43,100 @@ const VideoGridItem = ({ videoUrl }) => {
             <div className="grid-overlay">
                 <span>▶ View</span>
             </div>
+
+            <button
+                className="delete-post-btn"
+                onClick={(e) => {
+                    e.stopPropagation(); // prevent triggering view/play if implemented later
+                    if (window.confirm("Are you sure you want to delete this post?")) {
+                        onDelete(videoId);
+                    }
+                }}
+            >
+                🗑️
+            </button>
         </div>
     );
 };
 
 const Profile = () => {
-    const p = MOCK_PARTNER_DATA;
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [partner, setPartner] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchPartner = async () => {
+            try {
+                // Determine API base url (using localhost:3000 as default per earlier iterations)
+                const apiUrl = `http://localhost:3000/api/food-partner/${id}`;
+                const response = await axios.get(apiUrl, {
+                    withCredentials: true
+                });
+
+                setPartner(response.data.foodPartner);
+                setLoading(false);
+            } catch (err) {
+                console.error("Error fetching partner details:", err);
+                setError(err.response?.data?.message || "Failed to load profile");
+                setLoading(false);
+            }
+        };
+
+        if (id) {
+            fetchPartner();
+        }
+    }, [id]);
+
+    if (loading) {
+        return (
+            <div className="profile-container">
+                <div className="profile-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', color: 'white' }}>
+                    <h2>Loading Profile...</h2>
+                </div>
+            </div>
+        );
+    }
+
+    if (error || !partner) {
+        return (
+            <div className="profile-container">
+                <div className="profile-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', color: 'white' }}>
+                    <h2>{error || "Partner not found"}</h2>
+                </div>
+            </div>
+        );
+    }
+
+    const p = {
+        storeName: partner.name || MOCK_PARTNER_DATA.storeName,
+        avatar: MOCK_PARTNER_DATA.avatar,
+        dishes: partner.foodItems ? partner.foodItems.length : 0,
+        customersServed: MOCK_PARTNER_DATA.customersServed,
+        description: MOCK_PARTNER_DATA.description,
+        address: partner.address || MOCK_PARTNER_DATA.address,
+        videos: partner.foodItems ? partner.foodItems.map((item, idx) => ({
+            id: item._id,
+            url: item.video
+        })) : []
+    };
+
+    const handleDeletePost = async (videoId) => {
+        try {
+            await axios.delete(`http://localhost:3000/api/food/${videoId}`, {
+                withCredentials: true
+            });
+            // Update UI by filtering out the deleted video
+            setPartner(prevPartner => ({
+                ...prevPartner,
+                foodItems: prevPartner.foodItems.filter(item => item._id !== videoId)
+            }));
+        } catch (err) {
+            console.error("Failed to delete post:", err);
+            alert(err.response?.data?.message || "Failed to delete post. Please try again.");
+        }
+    };
 
     return (
         <div className="profile-container">
@@ -62,6 +152,21 @@ const Profile = () => {
                         <div className="profile-title-row">
                             <h1>{p.storeName}</h1>
                             <button className="profile-edit-btn">Edit Profile</button>
+                            <button
+                                className="profile-logout-btn"
+                                onClick={async () => {
+                                    try {
+                                        await axios.get('http://localhost:3000/api/auth/food-partner/logout', {
+                                            withCredentials: true
+                                        });
+                                        navigate('/food-partner/login');
+                                    } catch (err) {
+                                        console.error("Logout failed", err);
+                                    }
+                                }}
+                            >
+                                Logout
+                            </button>
                         </div>
 
                         <ul className="profile-stats">
@@ -80,6 +185,9 @@ const Profile = () => {
 
                 {/* Action Menu */}
                 <div className="profile-actions">
+                    <button className="action-btn" onClick={() => navigate("/create-food")} style={{ background: 'linear-gradient(135deg, #e23744, #ff6b6b)', color: 'white' }}>
+                        ➕ Create Post
+                    </button>
                     <button className="action-btn">
                         📖 View Menu
                     </button>
@@ -104,7 +212,12 @@ const Profile = () => {
                 {/* Instagram/TikTok Video Grid */}
                 <div className="profile-grid">
                     {p.videos.map((vid) => (
-                        <VideoGridItem key={vid.id} videoUrl={vid.url} />
+                        <VideoGridItem
+                            key={vid.id}
+                            videoId={vid.id}
+                            videoUrl={vid.url}
+                            onDelete={handleDeletePost}
+                        />
                     ))}
                 </div>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/Auth.css';
 import axios from 'axios';
@@ -6,20 +6,30 @@ import { useNavigate } from 'react-router-dom';
 
 const PartnerLogin = () => {
     const navigate = useNavigate();
+    const [error, setError] = useState("");
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(""); // reset error on new submission
 
         const email = e.target.elements.email.value;
         const password = e.target.elements.password.value;
 
-        const response = await axios.post("http://localhost:3000/api/auth/food-partner/login", {
-            email,
-            password
-        }, {
-            withCredentials: true
-        });
+        try {
+            const response = await axios.post("http://localhost:3000/api/auth/food-partner/login", {
+                email,
+                password
+            }, {
+                withCredentials: true
+            });
 
-        navigate("/create-food")
+            // The backend should return the partner ID in the response
+            const partnerId = response.data.foodPartner._id;
+            navigate(`/food-partner/${partnerId}`);
+        } catch (err) {
+            console.error("Partner Login Error:", err);
+            setError(err.response?.data?.message || "Invalid email or password");
+        }
     }
     return (
         <div className="auth-container auth-split">
@@ -39,6 +49,8 @@ const PartnerLogin = () => {
                         <h1>Partner Portal</h1>
                         <p>Sign in to manage your restaurant</p>
                     </div>
+
+                    {error && <div className="alert-box alert-error">{error}</div>}
 
                     <div className="auth-tabs">
                         <Link to="/user/login" className="auth-tab">User</Link>

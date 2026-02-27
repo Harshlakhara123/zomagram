@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/Home.css';
 
 const VideoPost = ({ video }) => {
     const videoRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
@@ -63,7 +65,11 @@ const VideoPost = ({ video }) => {
                         className="visit-store-btn"
                         onClick={(e) => {
                             e.stopPropagation();
-                            alert(`Redirecting to ${storeName}...`);
+                            if (video.foodPartner && video.foodPartner._id) {
+                                navigate(`/food-partner/${video.foodPartner._id}`);
+                            } else {
+                                alert("Sorry, store details are missing for this post!");
+                            }
                         }}
                     >
                         Visit Store
@@ -131,10 +137,26 @@ const Home = () => {
     }
 
     return (
-        <div className="reels-container">
+        <div className="reels-container" style={{ position: 'relative' }}>
             {videos.map((vid) => (
                 <VideoPost key={vid._id} video={vid} />
             ))}
+
+            <button
+                className="feed-logout-btn"
+                onClick={async () => {
+                    try {
+                        await axios.get('http://localhost:3000/api/auth/user/logout', {
+                            withCredentials: true
+                        });
+                        window.location.href = '/user/login';
+                    } catch (err) {
+                        console.error("Logout failed", err);
+                    }
+                }}
+            >
+                Logout🚪
+            </button>
         </div>
     );
 }
