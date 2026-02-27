@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/Auth.css';
 import axios from "axios";
@@ -6,8 +6,11 @@ import { useNavigate } from 'react-router-dom';
 
 const PartnerRegister = () => {
     const navigate = useNavigate();
+    const [error, setError] = useState("");
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(""); // reset error on new submission
 
         const name = e.target.elements.name.value;
         const contactName = e.target.elements.contactName.value;
@@ -16,20 +19,27 @@ const PartnerRegister = () => {
         const email = e.target.elements.email.value;
         const password = e.target.elements.password.value;
 
-        const response = await axios.post("http://localhost:3000/api/auth/food-partner/register", {
-            name,
-            contactName,
-            phone,
-            address,
-            email,
-            password
-        }, {
-            withCredentials: true
-        });
+        try {
+            const response = await axios.post("http://localhost:3000/api/auth/food-partner/register", {
+                name,
+                contactName,
+                phone,
+                address,
+                email,
+                password
+            }, {
+                withCredentials: true
+            });
 
-        console.log(response.data);
+            console.log(response.data);
 
-        navigate("/create-food")
+            // The backend should return the partner ID in the response
+            const partnerId = response.data.foodPartner._id;
+            navigate(`/food-partner/${partnerId}`);
+        } catch (err) {
+            console.error("Partner Registration Error:", err);
+            setError(err.response?.data?.message || "Registration failed. Please try again.");
+        }
     }
     return (
         <div className="auth-container auth-split">
@@ -49,6 +59,8 @@ const PartnerRegister = () => {
                         <h1>Partner with Zomagram</h1>
                         <p>Register to grow your business</p>
                     </div>
+
+                    {error && <div className="alert-box alert-error">{error}</div>}
 
                     <div className="auth-tabs">
                         <Link to="/user/register" className="auth-tab">User</Link>

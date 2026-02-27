@@ -1,0 +1,41 @@
+diff --git a/backend/src/app.js b/backend/src/app.js
+index 8695e03..a060e41 100644
+--- a/backend/src/app.js
++++ b/backend/src/app.js
+@@ -3,6 +3,7 @@ const express = require("express");
+ const cookieParser = require("cookie-parser");
+ const authRoutes = require("./routes/auth.routes");
+ const foodRoutes = require("./routes/food.routes");
++const foodPartnerRoutes = require("./routes/food-partner.routes");
+ const cors = require("cors");
+ 
+ const app = express();
+@@ -14,12 +15,12 @@ app.use(cors({
+ }));
+ 
+ 
+-app.get("/", (req,res) => {
++app.get("/", (req, res) => {
+     res.send("hello");
+ })
+ 
+ 
+ app.use("/api/auth", authRoutes);
+ app.use("/api/food", foodRoutes);
+-
++app.use("/api/food-partner", foodPartnerRoutes);
+ module.exports = app;
+\ No newline at end of file
+diff --git a/frontend/src/routes/AppRoutes.jsx b/frontend/src/routes/AppRoutes.jsx
+index 764fd14..0aa974e 100644
+--- a/frontend/src/routes/AppRoutes.jsx
++++ b/frontend/src/routes/AppRoutes.jsx
+@@ -18,7 +18,7 @@ const AppRoutes = () => {
+                 <Route path="/food-partner/login" element={<PartnerLogin />} />
+                 <Route path="/" element={<Home />} />
+                 <Route path="/create-food" element={<CreateFood />} />
+-                <Route path="/food-partner/profile" element={<Profile />} />
++                <Route path="/food-partner/:id" element={<Profile />} />
+             </Routes>
+         </Router>
+     )

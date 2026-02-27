@@ -74,6 +74,25 @@
     background-color: #dbdbdb;
 }
 
+.profile-logout-btn {
+    background-color: #fff0f1;
+    color: #e23744;
+    border: 1px solid #ffccd1;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: auto;
+    /* Push it to the right if space allows */
+}
+
+.profile-logout-btn:hover {
+    background-color: #ffe0e3;
+    border-color: #ffb3ba;
+}
+
 .profile-stats {
     display: flex;
     gap: 40px;
@@ -215,6 +234,35 @@
 
 .grid-item:hover .grid-overlay {
     opacity: 1;
+}
+
+.delete-post-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s, background-color 0.2s, transform 0.1s;
+}
+
+.grid-item:hover .delete-post-btn {
+    opacity: 1;
+}
+
+.delete-post-btn:hover {
+    background-color: #e23744;
+    transform: scale(1.1);
 }
 
 /* Mobile Responsiveness */

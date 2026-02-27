@@ -1,0 +1,51 @@
+﻿[dotenv@17.3.1] injecting env (5) from .env -- tip: ΓÜÖ∩╕Å  enable debug logging with { debug: true }
+[
+  {
+    "_id": "699f5d7ae76ecd7f3cf65070",
+    "name": "test-meal",
+    "video": "https://ik.imagekit.io/qxjlk4ben/f5e600a9-0e15-42b1-9723-118df1298e2a_kDB0ikKGp",
+    "description": "test-description",
+    "foodPartner": "699f5cd8e26a58b4e04d922d",
+    "__v": 0
+  },
+  {
+    "_id": "69a0ed6208f3a9afd0fbd350",
+    "name": "test-meal-2",
+    "video": "https://ik.imagekit.io/qxjlk4ben/410075b6-1f37-441b-980c-ced21d4377d0_hH1EDbQ2q",
+    "description": "test-description-2",
+    "foodPartner": "69a0ea3d97bc73f818f06d49",
+    "__v": 0
+  },
+  {
+    "_id": "69a0ee4d08f3a9afd0fbd353",
+    "name": "test-meal-3",
+    "video": "https://ik.imagekit.io/qxjlk4ben/d6f24d46-3c47-4dca-89c5-b892aec3edc3_s6nfXjxoL",
+    "description": "test-description-3",
+    "foodPartner": "69a0ea3d97bc73f818f06d49",
+    "__v": 0
+  },
+  {
+    "_id": "69a164a611ef1d597892fbc8",
+    "name": "test",
+    "video": "https://ik.imagekit.io/qxjlk4ben/4789ffd3-ff7a-4d96-969c-2aeec26e983c_XhAM2l-9k",
+    "description": "description entered by foodpartner manually",
+    "foodPartner": "69a162bcf3d9f71771763408",
+    "__v": 0
+  },
+  {
+    "_id": "69a167ca11ef1d597892fbf3",
+    "name": "second item",
+    "video": "https://ik.imagekit.io/qxjlk4ben/560ee54a-2400-452b-bcec-7605a75cad8e_9FbftCaus",
+    "description": "second item description manually",
+    "foodPartner": "69a162bcf3d9f71771763408",
+    "__v": 0
+  },
+  {
+    "_id": "69a1688111ef1d597892fbf6",
+    "name": "test food 3",
+    "video": "https://ik.imagekit.io/qxjlk4ben/f3c9fc13-c49d-455c-9df0-54242fad58a5_klk86Q_aG",
+    "description": "description entered manually 3",
+    "foodPartner": "69a162bcf3d9f71771763408",
+    "__v": 0
+  }
+]
