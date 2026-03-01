@@ -3,7 +3,7 @@
 Welcome to **Zomagram**! This project is a unique blend of **Zomato** and **Instagram**, bringing together the best of food discovery and visual social media. It serves as a unified platform where users can discover delicious food items through a visually appealing feed, and food partners (restaurants/creators) can showcase their offerings with high-quality images and videos.
 
 ## 🚀 Live Links
-- **Frontend (Vercel):** [Zomagram Frontend](https://zomagram-lemon.vercel.app/)
+- **Frontend (Vercel):** [Zomagram Frontend](https://zomagram-harshlakhara123s-projects.vercel.app/)
 - **Backend (Render):** Deployed and serving APIs via Render.
 
 ## 📖 Table of Contents
